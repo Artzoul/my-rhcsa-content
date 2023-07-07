@@ -1,0 +1,13 @@
+# Filesystem corruption can occur when you either make mistakes in /etc configuration files or filesystem become corrupted at the disk level
+# In either of the above cases systemd will not be able to boot the system in the defined target and bring the system in emergency mode/target
+# 1 Problem: Corrupt file system
+# 1 Result: systemd attempts to repair the file system. If the problem is too severe for an auto fix, the system drops the user to an emergency shell
+# 2 Problem: Nonexistent device or UUID referenced in /etc/fstab
+# 2 Result: systemd waits for a set amount of time, waiting for device to become available. If the device does not become available, the system drops the user to an emergency shell after the timeout
+# 3 Problem: Nonexistent mount point in etc/fstab
+# 3 Result: The system drops the user to an emergency shell
+# 4 Problem: ncorrect mount option specified in /etc/fstab
+# 4 Result: The system drops the user to an emergency shell
+
+# In any case admin can use the emergency target to diagnose and fix the issue, because no file system are mounted before the emergency shell is displayed
+# When using the emergency shell to fix filesystem issues, do not forget to run ' systemctl deamon-reload' after editing /etc/fstab. Without this reload, systemd may continue using old version of /etc/fstab file.
