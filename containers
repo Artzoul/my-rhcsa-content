@@ -1,0 +1,92 @@
+# The term container and the concept came from the shipping container. It's like no matter which part of the world you go ti, you will find these containers with the exact same measurements.
+# Container technology which allowed developers or programmers to test and build applications on any computer just by putting it in a container (bundles in with the software code, libraries and configurations files) and then run on another computer regardless of it architecture.
+# You can move the application anywhere without moving its OS just like moving the actual physical container anywhere that would fit on any dockyard , truck, ship or warehouse
+# An OS can run single or multiple containers at the same time.
+# As a system admin your job is to install, configure and manage containers.
+# Software to manage containers: Docker
+# Podman alternative to docker / developed by RedHat / it's a deamon less, open source, Linux-native tool designed to develop, manage and run containers
+# Using RHEL 8 -Docker is not supported
+
+# Set of CLI tools that operate without a container engine:
+-  porman - for directly managing pods and containers images (run, stop, ps, attacht, etc.)
+-  buildah - for building, pushing and signing containers images
+-  skopeo - for copying, inspecting, deleting and signing images
+-  runc - for providing container run and build features to podman and buildah
+-  crun - an optinal runtime that can be configured and gives greater flexibility, control and security for rootless containers.
+
+# Terms related to containers:
+-  images - conatiner can be created through images and containers can be converted to images
+-   pods - Group of containers deployed together on the host. In the podman logo there are 3 seals grouped together as a pod
+
+# Building, Running and Managing containers:
+# 1. install podman
+-  yum/dnf install podman -y
+-  yum install docker -y
+-  rpm -qa | grep podman
+-  podman -v 
+# 2. getting help
+-  podman --help or man podman
+# 3. check podman environment and registry /repository info
+-  podman info
+# 4. to search for a specific image in repo.
+-  podman search httpd
+# 5. to list any previously downloaded podman images
+-  podman images
+# 6. after verifying images - download available images 
+-  podman pull docker.io/library/httpd 
+# 7. to list podman running containers
+- podman ps
+# 8. to run downloaded httpd containers
+-  podman run -dt -p 8080:80/tcp docker.io/library/httpd         
+  d=detach, t=get the tty shell, p=port
+# 9. verify if container is running
+- podman ps or on web browser: localhost:8080 output: IT works!
+# 10. check podman logs.
+-   podman logs -l
+# 11. stop running container (check container name or ID)
+- podman stop con-id
+# 12. to run a multiple containers of httpd by changing the port
+-   podman -dt -p 8081:80/tcp docker.io/library/httpd
+-   podman -dt -p 8082:80/tcp docker.io/library/httpd
+# 13. to start and stop a previously running container
+-   podman stop|start con-id
+# 14. to create a new container from the downloaded images
+- podman create --name art-zwa docker.io/library/httpd
+# 15. after creating a new container with new name - start the container and verify if it's running
+-  podman start art-zwa
+-  podman ps
+
+# Manage containers through systemd
+# 1. generate a unit file httpd /
+-  podman generate systemd --new --fiels --name art-zwa
+# 2. copy it systmed.directory if its not in /etc/systemd/system directory
+-  cp /root/container-httpd.service /etc/systemd/system
+# 3. verify 
+-  ls -ltr
+# 4. enable the service
+-  systemctl enable container-art-zwa.service
+# 5. start the service
+-  systemctl start container-art-zwa.service
+# 6. verify
+- systemctl status container-art-zwa.service
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
