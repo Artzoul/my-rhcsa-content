@@ -1,0 +1,19 @@
+# Recovering Root Password
+
+# Step1 Restart your running PC/VM/Server
+# Step2 Edit grub
+# Step3 Change password
+# Step4 Reboot 
+
+# Commands
+- reebot
+# Fast select your OS and Press 'e' to edit the selection
+# Go down to the parameters where is 'ro'-stands for 'read only' and replace it with: rw init=/sysroot/bin/sh
+# type Ctrl-X to Start your system in single user mode.
+:/# chroot /sysroot
+:/# passwd root - at the next step provide your new password!
+New password:
+# retype your new password!
+- exit
+- reboot
+# Your new root  password should be set after system reboot
