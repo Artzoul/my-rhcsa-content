@@ -1,0 +1,73 @@
+# Introduction to Firewall & Network Security
+
+# Firewall works the same way as iptables but it has it own commands 
+-  firewall-cmd
+# It has a few pre-defined service rules -  easy to turn of and on
+- NFS, NTP, HTTPD etc.
+# Firewall include
+-  Table - all info about chains, rules , targets
+-  Chains - outgoing, incomimg, forwarding traffic info
+-  Rules
+-  Target - drop, accept, reject
+
+# run  iptables or firewalld
+# make sure iptables is dtopped , disabled and mask
+-   systemctl mask iptables
+-   systemctl stop iptables
+-   systemctl disable iptables
+
+# check if firewalld package is installed
+-  rpm -qa | grep firewalld
+-  systemctl start/stop firewalld
+-  systemctl enable/disable firewalld
+
+# rule of firewalld
+-  firewalld-cmd --list-all
+
+# get the listing of all services firewalld is aware of
+- firewall-cmd --get-services
+
+# make firewall re-read the config added
+-  firewall-cmd --reload
+
+# firewalld has multiple zone, to get a list of all zones
+-  firewall-cmd --get-zones
+
+# listing active zones
+-  firewalld-cmg --get-active-zone
+
+# get firewall rules for public zone
+-  firewall-cmd --zone=public --list-all
+
+# all services are pre-difined by firewall. If you want to add 3rd party service SPA etc.
+-  /usr/lib/firewalld/services/allservices.xml
+-  simply cp any -xml fiel and change the service and port
+
+# add a service (http)
+-  firewall-cmd --add/remove-service=http
+
+# reload the wirwalld config
+-  firewall-cmd --reload
+
+# add firewall or remove a service permanently
+-  firewall-cmd --add/remove-service=http --permanent
+
+# add a service that is not pre-defined by firewall
+-   /usr/lb/firewalld/services/allsevices.xml
+--  simply cp any .xml file newservicefilename.xml and change the service and port 
+-  systemctl restart firewalld
+-  firewall-cmd --get-services
+- firewall-cmd --add-service=newservicefilename
+
+# add/remove port to firewall config
+-  firewall-cmd --add/remove-port=1110/tcp
+
+# reject incoming traffic from an IP address
+-  firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.0.25" reject'
+
+# block and  unblock ICMP incoming traffic
+-  firewall-cmd --add/remove-icmp-block-inversion
+
+# block outgoing traffic to a specific website/IP address
+-  host -t a www.facebook.com                                = find IP address
+-  firewall-cmd --direct --add-ruel ipv4 filter OUTPUT 0 -d 157.240.17.35 -j DROP
