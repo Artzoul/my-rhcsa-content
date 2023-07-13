@@ -1,0 +1,23 @@
+# Service or application when started creates processes and when those processes tun continuously in the background, they become deamons
+# Most services are deamons
+# Services are contolled by systemctl
+# sytemctl is a systemd utility that is responsible for controlling the systemd system and service manager
+# systemd is a collection of system management deamons, utilities and libraries which serves as a replacement of System V init deamon
+# systemd is the parent process of most of the deamons
+# the command to control services = systemctl
+
+# check if systemctl is installed in your system
+-  systemctl --version
+# check if systemd is running
+- ps -ef | grep systemd
+# check all running services
+- systemctl --all
+# check the status, start, stop, and restart a service
+-  systemctl status|start|stop|restart application.service
+# to reload the configuration of a service
+-  systemctl reload apllication.service
+# to enable or disable a service at boot time
+-  systemctl enable/disable application.service
+# to enable or disable a service completly at a boot or manually
+- systemctl mask|unmask application.service
+
