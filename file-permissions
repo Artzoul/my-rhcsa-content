@@ -1,0 +1,30 @@
+# Unix/linux is a multi user system. Every file and directory in your account can be protected from or made accessible to other users by changing its access permissions.
+  Every user has responsibility for controlling access to their files.
+# Permissions for file or directory may be restricted to by types.
+# There are 3 type of permissions:
+-  r: read
+-  w: write
+-  x: execute
+# Each permission (rwx) can be controlled at three levels
+-  a: all
+-  u: user=yourself
+-  g: group=can be people in the project
+-  o: other=everyone on the system
+# File or Directory permission can be displayed by running ls -l command
+- -rwxrwxrwx
+
+# change file permission
+- chmod a-x xyz
+
+# run a file
+-  ./filename
+
+# there are 2 owner of a file or directory
+-  user and group (by default user who creats the file owns the file)
+# command to change file ownership
+-  chown and chgrp
+-  chown chnages the ownership of a file
+-  chgrp changes the group ownership of a file
+# Recursive ownership change option (Cascade)
+-  chown or chgrp -R (with -R will change the directory and all the files in the direcotry)
+
