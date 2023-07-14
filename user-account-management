@@ -1,0 +1,44 @@
+# Commands
+-  useradd
+-  groupadd
+-  userdel  
+-  userdel -r (delete with hoem directory)
+-  groupdel
+-  usermod
+-  chgrp
+
+# Files
+- /etc/password
+- /etc/group
+- /etc/shadow
+
+# Example
+-  useradd -g heros -s /bin/bash -c "user description" -m -d /home/spiderman spidemann
+
+# add user to a group
+-  usermod -G heros spiderman
+- usermod -aG wheel spiderman
+# verify
+-  cat /etc/passwd 
+# change group
+-  chgrp -R heros spideman
+# set password for user
+-  passwd ironman
+# change user name
+-  usermod -l newname oldname
+# lock user password q
+-  usermod -L username
+
+# The chanchnagege command -per user Example - used to set parametors arround the password
+-  chage [-d lastday] [-m mindays] [-M maxdays] [-d lastday] [I inactive] [-E expiredate] [-W warndays] user
+-  chage -m 5 -M 90 -W 10 -I 3 ironaman
+-  man chage 
+# File = /etc/login.def - contorls how password is set for each new user level.
+
+# Switch Users and sudo access / Commands
+-  su - username
+-  sudo command
+-  visudo
+# File
+- /etc/sudoers
+
