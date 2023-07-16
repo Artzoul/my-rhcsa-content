@@ -1,0 +1,24 @@
+# Applications = Service | Script | Process | Deamon | Threads | Job
+# When an operating system boots up many programs get loaded into memory. These processes or programs need to be managed
+  and monitored beacause they consume mainly 3 system resources like CPU, memory and disk space
+# Application - program wich run - NTP, NFS etc...
+# Script - something written in a File an packages in way that will execute. Shell scripts are lists of commandos which can be executed
+# Deamon - runs until interrupted, runs in the background, listen to outgoing or incomming traffic
+# Threads - (service-->process-->threads1 ...)
+# Job or Workloader 
+# here are a few monitoring command to manage system resources
+-  df -T
+-  du
+-  du -k | sort -nr | more
+-  uptime
+-  top
+-  free
+-  lsof
+-  tcpdump
+-  netstat  -rnv
+-  netstat  -au -udp traffic
+-  netstat  -at -tcp traffic
+-  ps
+-  ps -ef
+-  kill
+-  vmstat | iostat | iftop
