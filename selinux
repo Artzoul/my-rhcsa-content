@@ -1,0 +1,51 @@
+# SELinux is a kernel security module that provides a mechanism for supporting access control security policies, including mandatory access controls.
+# DAC - Discretionary Acces Control
+# MAC - SElinux Mandatory Access control 
+# User:role:type:level
+# SELinux Mode
+- Enforcing = Enable (enabled by default)
+- Permissive = Disabled but logs the activity
+- Diasble = Disable and not activity logs
+# Booleans are on/off switch for SELinux (do we allow the ftp server access to home directories" to more esoteric "httpd can use mod_auth_ntlm_winbing".
+# check for any issues with selinux at log leve
+- jornalctl -b -0 
+# check booleans settings - look at he booleans.local file under /etc/selinux/targeted/modules/active/
+# When you use setsebool -P, the enitre /etc/selinux/targeted directory is regenerated. thats fiel doesn't actually do anything - it just tells you what's been set.
+# Example 
+- touch XYZ
+- setsebool -P httpd_enable_homedirs=1
+- find /etc/selinux/ -newer marker
+# To check SELinuy Status
+- sestatus OR getenforce
+# SELinux setting
+- setenforce 0 = Permissive/DIsable
+- setenforce 1 = Enable
+# Modify SELinux config for permanent setting
+- vim /etc/selinux/config
+- SELINUX=enforcing
+- SELINUX=disabled
+# Before modifying selinux config file - create a snapshot of your VM
+# Before rebooting create a file
+- /.autorelable
+# list the label of a dir.
+- ls -lZ /usr/sbin/httpd - executable file
+- ls -dZ /etc/httpd -
+# As webserver runs its process is labeled in memory as httpd_t
+- ps axZ | grep httpd_t
+# SELinux assigns the label at the socket level
+- netstat -tnlpZ | grep http
+# Example a-z check labels
+- rpm -qa | grep http
+- systemctl status httpd
+- systemctl start httpd
+- systemctl status httpd
+- ps axZ | grep httpd
+- netstat -tnlpZ | grep httpd
+# Manage SELinux
+- semanage - to label: (login, user, port, interface, module, node, file context, boolean, permissive state, dontaudit)
+- semange boolean -l (= getsebool -a)
+- setsebool -P boolean_name on/off
+# Chek error messages related to SELinux
+- journalctl
+# Change the type in a label - 2 COMMANDS
+- chcon -t httpd_sys_content_t FILENAME   =    semanege -t httpd_sys_content_t FILENAME
